@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Tijolos Ecológicos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+
+    .calculadora {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #2d7a36;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #25662d;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculadora">
+    <h2>Calculadora de Tijolos Ecológicos</h2>
+    
+    <label for="comprimento">Comprimento da parede (em metros):</label>
+    <input type="number" id="comprimento" step="0.01" placeholder="Ex: 3.5">
+    
+    <label for="altura">Altura da parede (em metros):</label>
+    <input type="number" id="altura" step="0.01" placeholder="Ex: 2.7">
+    
+    <button onclick="calcularTijolos()">Calcular</button>
+    
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    function calcularTijolos() {
+      const comprimento = parseFloat(document.getElementById("comprimento").value);
+      const altura = parseFloat(document.getElementById("altura").value);
+
+      if (isNaN(comprimento) || isNaN(altura) || comprimento <= 0 || altura <= 0) {
+        document.getElementById("resultado").innerHTML = "Por favor, insira valores válidos.";
+        return;
+      }
+
+      const areaParede = comprimento * altura;
+      const areaTijolo = 0.30 * 0.11; // 0,033 m²
+      const quantidade = Math.ceil(areaParede / areaTijolo);
+
+      document.getElementById("resultado").innerHTML = `
+        Área da parede: ${areaParede.toFixed(2)} m²<br>
+        Quantidade estimada de tijolos: ${quantidade} unidades
+      `;
+    }
+  </script>
+
+</body>
+</html>
